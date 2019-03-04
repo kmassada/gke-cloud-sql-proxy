@@ -50,13 +50,6 @@ kubectl create secret generic cloudsql-db-credentials \
  --from-literal password=`cat file`
  ```
 
-## Sub and Apply
-
-```shell
-envsubst < mysql_wordpress_deployment.yaml > deployment.yaml
-kubectl apply -f deployment.yaml
-```
-
 ## Verify
 
 creds
@@ -82,7 +75,18 @@ chmod +x cloud_sql_proxy
 > mysql -h 127.0.0.1 -u root --protocol=tcp
 ```
 
-## grpc example
+## Wordpress
+
+### Sub and Apply
+
+```shell
+envsubst < mysql_wordpress_deployment.yaml > deployment.yaml
+kubectl apply -f deployment.yaml
+```
+
+## cloudsql-client
+
+### build
 
 ```shell
 export _REPO_PREFIX=makz-labs
@@ -91,4 +95,11 @@ export REPO_NAME=$APPLICATION
 gcloud builds submit \
     --substitutions _REPO_PREFIX=$_REPO_PREFIX,REPO_NAME=$REPO_NAME,TAG_NAME=cli,SHORT_SHA=clisha \
     --config cloudbuild.yaml
+```
+
+### Apply
+
+```shell
+envsubst < mysql_grpc_deployment.yaml > deployment.yaml
+kubectl apply -f deployment.yaml
 ```
