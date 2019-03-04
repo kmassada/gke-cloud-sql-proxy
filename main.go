@@ -62,6 +62,8 @@ func main() {
 		// Seed before random int
 		rand.Seed(time.Now().UTC().UnixNano())
 
+		time.Sleep(300 * time.Second)
+
 		var squareNum int // we "scan" the result in here
 		datNum := randInt(0, 24)
 
@@ -70,9 +72,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err.Error())
 		}
-		fmt.Printf("The square number of %d is: %d", datNum, squareNum)
-
-		time.Sleep(30 * time.Second)
+		fmt.Printf("The square number of %d is: %d\n", datNum, squareNum)
 	}
 }
 func randInt(min int, max int) int {
