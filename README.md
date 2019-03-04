@@ -59,6 +59,8 @@ kubectl apply -f deployment.yaml
 
 ## Verify
 
+creds
+
 ```console
 $ kubectl get secrets
 NAME                            TYPE                                  DATA      AGE
@@ -66,3 +68,17 @@ cloudsql-db-credentials         Opaque                                2         
 cloudsql-instance-connection    Opaque                                1         11m
 cloudsql-instance-credentials   Opaque                                1         7m
 ```
+
+cloud sql proxy
+
+```shell
+wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+chmod +x cloud_sql_proxy
+
+./cloud_sql_proxy \
+    -instances=$INSTANCE_CONNECTION_NAME=tcp:3306 \
+    -credential_file=/home/$USER/$CLOUD_SQL_NAME-key.json &
+
+> mysql -h 127.0.0.1 -u root --protocol=tcp
+```
+
