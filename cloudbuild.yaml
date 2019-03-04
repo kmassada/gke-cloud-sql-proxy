@@ -1,6 +1,6 @@
 steps:
 - name: 'gcr.io/cloud-builders/go'
-  args: ['get', '-u', 'github.com/go-sql-driver/mysql', '"github.com/VividCortex/mysqlerr"', 'database/sql']
+  args: ['get', '-u', 'github.com/go-sql-driver/mysql', 'github.com/VividCortex/mysqlerr', 'database/sql']
   env: ['PROJECT_ROOT=app']
 - name: 'gcr.io/cloud-builders/go'
   args: ['build', 'app']
