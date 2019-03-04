@@ -9,7 +9,9 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("mysql", os.Getenv("CLOUDSQL_DB_USER")+":"+os.Getenv("CLOUDSQL_DB_PASSWORD")+"@"+os.Getenv("INSTANCE_CONNECTION_NAME")+"/cloudsqlclient")
+	connectstring := os.Getenv("CLOUDSQL_DB_USER") + ":" + os.Getenv("CLOUDSQL_DB_PASSWORD") + "@tcp(" + os.Getenv("CLOUDSQL_DB_HOST") + ")/cloudsqlclient"
+	fmt.Print(connectstring)
+	db, err := sql.Open("mysql", connectstring)
 	if err != nil {
 		panic(err.Error()) // Just for example purpose. You should use proper error handling instead of panic
 	}
