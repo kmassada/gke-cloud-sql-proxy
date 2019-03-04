@@ -25,7 +25,8 @@ func main() {
 	err = db.Ping()
 	fmt.Println("pinging")
 	if err != nil {
-		fmt.Println("ping hung")
+		log.Printf("ping hung")
+		// if proxy not ready this is a good checkpoint
 		log.Fatal(err.Error())
 	}
 
@@ -62,15 +63,16 @@ func main() {
 		rand.Seed(time.Now().UTC().UnixNano())
 
 		var squareNum int // we "scan" the result in here
+		datNum := randInt(0, 24)
 
 		// Query the square-number of 13
-		err = stmtOut.QueryRow(randInt(0, 24)).Scan(&squareNum) // WHERE number = 13
+		err = stmtOut.QueryRow(datNum).Scan(&squareNum) // WHERE number = 13
 		if err != nil {
 			log.Fatal(err.Error())
 		}
-		fmt.Printf("The square number of 13 is: %d", squareNum)
+		fmt.Printf("The square number of %d is: %d", datNum, squareNum)
 
-		time.Sleep(time.Second)
+		time.Sleep(30 * time.Second)
 	}
 }
 func randInt(min int, max int) int {
