@@ -108,6 +108,8 @@ tables need to be created for this example
 
 ```sql
 CREATE DATABASE cloudsqlclient;
+USE cloudsqlclient;
+DROP TABLE squareNum;
 CREATE TABLE squareNum (
     number int,
     squareNumber int,
