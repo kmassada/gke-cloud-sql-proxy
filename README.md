@@ -14,7 +14,8 @@ gcloud sql instances create $CLOUD_SQL_NAME \
 ```shell
 export INSTANCE_CONNECTION_NAME=`gcloud sql instances describe $CLOUD_SQL_NAME --format='value(connectionName)'`
 kubectl create secret generic cloudsql-instance-connection \
- --from-literal name=$INSTANCE_CONNECTION_NAME
+ --from-literal connection=$INSTANCE_CONNECTION_NAME \
+ --from-literal name=$CLOUD_SQL_NAME \
 ```
 
 ## Create SA
@@ -45,3 +46,13 @@ kubectl create secret generic cloudsql-db-credentials \
  --from-literal username=admin \
  --from-literal password=`cat file`
  ```
+
+## Verify
+
+```console
+$ kubectl get secrets
+NAME                            TYPE                                  DATA      AGE
+cloudsql-db-credentials         Opaque                                2         4m
+cloudsql-instance-connection    Opaque                                1         11m
+cloudsql-instance-credentials   Opaque                                1         7m
+```
