@@ -11,9 +11,9 @@ import (
 
 func main() {
 	connectstring := os.Getenv("CLOUDSQL_DB_USER") + ":" + os.Getenv("CLOUDSQL_DB_PASSWORD") + "@tcp(" + os.Getenv("CLOUDSQL_DB_HOST") + ")/cloudsqlclient"
-	fmt.Print(connectstring)
 	db, err := sql.Open("mysql", connectstring)
 	if err != nil {
+		fmt.Print(connectstring)
 		log.Fatal(err.Error()) // Just for example purpose. You should use proper error handling instead of panic
 	}
 	defer db.Close()
