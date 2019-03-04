@@ -50,6 +50,13 @@ kubectl create secret generic cloudsql-db-credentials \
  --from-literal password=`cat file`
  ```
 
+## Sub and Apply
+
+```shell
+envsubst < mysql_wordpress_deployment.yaml > deployment.yaml
+kubectl apply -f deployment.yaml
+```
+
 ## Verify
 
 ```console
