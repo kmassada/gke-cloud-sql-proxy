@@ -43,6 +43,8 @@ kubectl create secret generic cloudsql-instance-credentials --from-file /home/$U
 
 ```shell
 date +%s | sha256sum | base64 | head -c 12 ; echo > file
+gcloud sql users create admin \
+   --host=% --instance=$CLOUD_SQL_NAME --password=`cat file`
 kubectl create secret generic cloudsql-db-credentials \
  --from-literal username=admin \
  --from-literal password=`cat file`
