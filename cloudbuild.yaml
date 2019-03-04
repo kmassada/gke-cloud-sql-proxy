@@ -1,0 +1,25 @@
+steps:
+- name: 'gcr.io/cloud-builders/go'
+  args: ['get', '-u', 'github.com/go-sql-driver/mysql', 'database/sql']
+  env: ['PROJECT_ROOT=app']
+- name: 'gcr.io/cloud-builders/go'
+  args: ['build', 'app']
+  env: ['PROJECT_ROOT=app']
+- name: 'ubuntu'
+  args: ['chmod', '+x', 'app']
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', 
+  '-t', 'gcr.io/${PROJECT_ID}/${_REPO_PREFIX}/${REPO_NAME}:$TAG_NAME', 
+  '-t', 'gcr.io/${PROJECT_ID}/${_REPO_PREFIX}/${REPO_NAME}:$SHORT_SHA', 
+  '-t', 'gcr.io/${PROJECT_ID}/${_REPO_PREFIX}/${REPO_NAME}', 
+  '.' ]
+images:
+- 'gcr.io/${PROJECT_ID}/${_REPO_PREFIX}/${REPO_NAME}'
+tags: [$TAG_NAME, $REVISION_ID, '$REPO_NAME']
+substitutions:
+  _REPO_PREFIX: makz-labs
+  # TAG_NAME: auto
+artifacts:
+  objects:
+    location: 'gs://${PROJECT_ID}_${_REPO_PREFIX}/${REPO_NAME}'
+    paths: ['app']

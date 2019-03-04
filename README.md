@@ -81,3 +81,14 @@ chmod +x cloud_sql_proxy
 
 > mysql -h 127.0.0.1 -u root --protocol=tcp
 ```
+
+## grpc example
+
+```shell
+export _REPO_PREFIX=makz-labs
+export APPLICATION=gke-cloud-sql-proxy
+export REPO_NAME=$APPLICATION
+gcloud builds submit \
+    --substitutions _REPO_PREFIX=$_REPO_PREFIX,REPO_NAME=$REPO_NAME,TAG_NAME=cli,SHORT_SHA=clisha \
+    --config cloudbuild.yaml
+```
