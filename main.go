@@ -35,7 +35,7 @@ func main() {
 	defer stmtIns.Close() // Close the statement when we leave main() / the program terminates
 
 	// Prepare statement for reading data
-	stmtOut, err := db.Prepare("SELECT squareNumber FROM squarenum WHERE number = ?")
+	stmtOut, err := db.Prepare("SELECT squareNumber FROM squareNum WHERE number = ?")
 	if err != nil {
 		log.Fatal(err.Error()) // proper error handling instead of panic in your app
 	}
