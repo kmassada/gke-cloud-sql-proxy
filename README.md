@@ -16,7 +16,7 @@ gcloud services enable sqladmin.googleapis.com
 export INSTANCE_CONNECTION_NAME=`gcloud sql instances describe $CLOUD_SQL_NAME --format='value(connectionName)'`
 kubectl create secret generic cloudsql-instance-connection \
  --from-literal connection=$INSTANCE_CONNECTION_NAME \
- --from-literal name=$CLOUD_SQL_NAME \
+ --from-literal name=$CLOUD_SQL_NAME
 ```
 
 ## Create SA
