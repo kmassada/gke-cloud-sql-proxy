@@ -6,7 +6,8 @@ import (
 	"log"
 	"os"
 
-	_ "github.com/go-sql-driver/mysql"
+	"github.com/VividCortex/mysqlerr"
+	"github.com/go-sql-driver/mysql"
 )
 
 func main() {
@@ -44,10 +45,11 @@ func main() {
 	for i := 0; i < 25; i++ {
 		_, err = stmtIns.Exec(i, (i * i)) // Insert tuples (i, i^2)
 		if err != nil {
-			switch err {
-			case sql.ErrTxDone:
-				log.Println("Insert already Happened")
-			default:
+			if driverErr, ok := err.(*mysql.MySQLError); ok {
+				if driverErr.Number == mysqlerr.ER_DUP_ENTRY {
+					log.Printf(err.Error())
+				}
+			} else {
 				log.Fatal(err.Error()) // proper error handling instead of panic in your app
 			}
 		}
