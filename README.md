@@ -25,9 +25,9 @@ kubectl create secret generic cloudsql-instance-connection \
 gcloud iam service-accounts create $CLOUD_SQL_NAME --display-name "Cloud SQL Service Account"
 export CLOUD_SQL_EMAIL=`gcloud iam service-accounts list --format='value(email)' --filter='displayName:Cloud SQL Service Account'`
 
-export PROJECT=`gcloud config get-value project`
+export PROJECT_ID=`gcloud config get-value project`
 
-gcloud projects add-iam-policy-binding $PROJECT --member=serviceAccount:${CLOUD_SQL_EMAIL} --role=roles/cloudsql.editor
+gcloud projects add-iam-policy-binding $PROJECT_ID --member=serviceAccount:${CLOUD_SQL_EMAIL} --role=roles/cloudsql.editor
 
 ```
 
