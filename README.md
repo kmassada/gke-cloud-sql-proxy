@@ -103,3 +103,14 @@ gcloud builds submit \
 envsubst < mysql_grpc_deployment.yaml > deployment.yaml
 kubectl apply -f deployment.yaml
 ```
+
+tables need to be created for this example
+
+```sql
+CREATE DATABASE cloudsqlclient;
+CREATE TABLE squareNum (
+    number int,
+    squareNumber int,
+    PRIMARY KEY( number )
+);
+```
