@@ -6,6 +6,7 @@ metadata:
   labels:
     app: "wordpress"
 spec:
+  sessionAffinity: "ClientIP"
   ports:
   - protocol: "TCP"
     port: 80
