@@ -17,6 +17,14 @@ func main() {
 	}
 	defer db.Close()
 
+	// Open doesn't open a connection. Validate DSN data:
+	err = db.Ping()
+	fmt.Print("pinging")
+	if err != nil {
+		fmt.Print("ping hung")
+		panic(err.Error()) // proper error handling instead of panic in your app
+	}
+
 	// Prepare statement for inserting data
 	stmtIns, err := db.Prepare("INSERT INTO squareNum VALUES( ?, ? )") // ? = placeholder
 	if err != nil {
