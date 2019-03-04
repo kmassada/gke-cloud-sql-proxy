@@ -44,7 +44,12 @@ func main() {
 	for i := 0; i < 25; i++ {
 		_, err = stmtIns.Exec(i, (i * i)) // Insert tuples (i, i^2)
 		if err != nil {
-			log.Fatal(err.Error()) // proper error handling instead of panic in your app
+			switch err {
+			case sql.ErrTxDone:
+				log.Println("Insert already Happened")
+			default:
+				log.Fatal(err.Error()) // proper error handling instead of panic in your app
+			}
 		}
 	}
 
