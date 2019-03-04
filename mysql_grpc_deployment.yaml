@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: cloudsql-client
-          image: cloudsql-client:latest
+          image: gcr.io/${PROJECT_ID}/${_REPO_PREFIX}/${REPO_NAME}
           env:
             - name: CLOUDSQL_DB_HOST
               value: 127.0.0.1:3306
