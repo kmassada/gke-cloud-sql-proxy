@@ -42,7 +42,7 @@ kubectl create secret generic cloudsql-instance-credentials --from-file /home/$U
 ```
 
 ```shell
-date +%s | sha256sum | base64 | head -c 12 ; echo > file
+date +%s | sha256sum | base64 | head -c 12 > file
 gcloud sql users create admin \
    --host=% --instance=$CLOUD_SQL_NAME --password=`cat file`
 kubectl create secret generic cloudsql-db-credentials \
@@ -81,4 +81,3 @@ chmod +x cloud_sql_proxy
 
 > mysql -h 127.0.0.1 -u root --protocol=tcp
 ```
-
