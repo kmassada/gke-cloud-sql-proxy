@@ -1,0 +1,14 @@
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "cloudsql-proxy-service"
+  namespace: "default"
+  labels:
+    app: "cloudsql-proxy"
+spec:
+  ports:
+  - protocol: "TCP"
+    targetPort: 3306
+  selector:
+    app: "cloudsql-proxy"
+  type: "ClusterIP"
