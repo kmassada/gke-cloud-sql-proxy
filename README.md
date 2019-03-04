@@ -7,6 +7,7 @@ export CLOUD_SQL_NAME=instance1
 gcloud sql instances create $CLOUD_SQL_NAME \
     --tier=db-n1-standard-2 \
     --region=us-west2
+gcloud services enable sqladmin.googleapis.com
 ```
 
 ## Download instance name
