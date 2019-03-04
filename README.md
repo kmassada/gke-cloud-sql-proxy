@@ -100,7 +100,7 @@ gcloud builds submit \
 ### Apply
 
 ```shell
-envsubst < mysql_grpc_deployment.yaml > deployment.yaml
+envsubst < mysql_grpc_sidecar_deployment.yaml > deployment.yaml
 kubectl apply -f deployment.yaml
 ```
 
