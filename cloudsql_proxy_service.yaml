@@ -9,6 +9,7 @@ spec:
   ports:
   - protocol: "TCP"
     targetPort: 3306
+    port: 3306
   selector:
     app: "cloudsql-proxy"
   type: "ClusterIP"
