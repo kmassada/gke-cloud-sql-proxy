@@ -6,6 +6,7 @@ metadata:
   labels:
     app: "cloudsql-proxy"
 spec:
+  sessionAffinity: "ClientIP"
   ports:
   - protocol: "TCP"
     targetPort: 3306
